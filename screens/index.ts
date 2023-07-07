@@ -1,7 +1,4 @@
 import HomeScreen from "./HomeScreen";
-import ClubScreen from "./ClubScreen";
+import ListOfPlayers from "./ListOfPlayers";
 
-export {
-    HomeScreen,
-    ClubScreen
-}
+export { HomeScreen, ListOfPlayers };

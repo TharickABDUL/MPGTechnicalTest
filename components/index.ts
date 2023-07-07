@@ -1,5 +1,5 @@
-import {HomeScreenButton} from "./Button";
+import { HomeScreenButton } from "./Button";
+import SearchBar from './SearchBar';
+import PlayerCard from './PlayerCard';
 
-export {
-    HomeScreenButton
-}
+export { HomeScreenButton, SearchBar, PlayerCard };
