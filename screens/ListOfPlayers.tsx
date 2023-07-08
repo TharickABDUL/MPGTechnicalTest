@@ -1,6 +1,6 @@
 import { Text, View, Image, SafeAreaView, FlatList } from 'react-native';
 import { useEffect, useState } from 'react';
-import { SearchBar, PlayerCard, PositionSelector } from '../components';
+import { SearchBar, PlayerCard, PositionSelector, Header } from '../components';
 
 import { getPlayersList } from '../services/playersList';
 import { getClubsList } from '../services/clubsList';
@@ -68,17 +68,18 @@ const ListOfPlayers = () => {
 
       }}
     >
+      <Header text={'Liste des joueurs'} />
 
 
-        <SearchBar
-          searchInput={searchInput}
-          setSearchInput={setSearchInput}
-        />
+      <SearchBar
+        searchInput={searchInput}
+        setSearchInput={setSearchInput}
+      />
 
-        <PositionSelector
-          dropDownValue={dropDownValue}
-          setDropDownValue={setDropDownValue}
-        />
+      <PositionSelector
+        dropDownValue={dropDownValue}
+        setDropDownValue={setDropDownValue}
+      />
 
       <FlatList
         data={filteredPlayers.length ? filteredPlayers : players}

@@ -1,12 +1,19 @@
 import { Text, View, Image } from 'react-native';
 import { HomeScreenButton } from '../components';
+import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
+import { Player } from '../interface/Player';
+import { ReactElement } from 'react';
+
+type RootStackParams = {
+  ListOfPlayers: undefined
+};
 
 const HomeScreen = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
 
   const navigateToCreateAccount = () => {
-    navigation.navigate('ListOfPlayers' as never);
+    navigation.navigate('ListOfPlayers');
   };
 
   return (

@@ -9,8 +9,8 @@ enum UltraPositionDetails {
 
 export const positionNames = {
   [UltraPositionDetails.Gardien]: 'Gardien',
-  [UltraPositionDetails.Defenseur]: 'Defenseur',
-  [UltraPositionDetails.Lateral]: 'Lateral',
+  [UltraPositionDetails.Defenseur]: 'Défenseur',
+  [UltraPositionDetails.Lateral]: 'Latéral',
   [UltraPositionDetails.MilieuOffensif]: 'Milieu offensif',
   [UltraPositionDetails.MilieuDefensif]: 'Milieu défensif',
   [UltraPositionDetails.Attaquant]: 'Attaquant',

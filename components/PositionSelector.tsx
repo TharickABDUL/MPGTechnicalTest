@@ -23,6 +23,11 @@ const PositionSelector = ({ dropDownValue, setDropDownValue }: PositionSelectorP
       }
     )));
 
+  const clearAndCloseList = () => {
+    setDropDownValue(null);
+    setOpen(false);
+  };
+
   return (
     <View style={{ flexDirection: 'row', width: '55%', alignItems: 'center', zIndex: 1, marginVertical: 10 }}>
       <DropDownPicker
@@ -34,8 +39,9 @@ const PositionSelector = ({ dropDownValue, setDropDownValue }: PositionSelectorP
         setOpen={setOpen}
         setValue={setDropDownValue}
         setItems={setItems}
+        placeholder={'Filtrer par poste'}
       />
-      <TouchableOpacity style={{ marginLeft: 10 }} onPress={() => setDropDownValue(null)}>
+      <TouchableOpacity style={{ marginLeft: 10 }} onPress={clearAndCloseList}>
         <X stroke={'black'} />
       </TouchableOpacity>
     </View>
