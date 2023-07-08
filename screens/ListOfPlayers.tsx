@@ -1,14 +1,13 @@
-import { Text, View, Image, SafeAreaView, FlatList } from 'react-native';
+import { SafeAreaView, FlatList, StyleSheet } from 'react-native';
 import { useEffect, useState } from 'react';
 import { SearchBar, PlayerCard, PositionSelector, Header } from '../components';
-
 import { getPlayersList } from '../services/playersList';
 import { getClubsList } from '../services/clubsList';
 import { Player, positionNames } from '../interface/Player';
+import { Club } from '../interface/Club';
 
 
 const ListOfPlayers = () => {
-
   const [filteredPlayers, setFilteredPlayers] = useState<Player[]>([]);
   const [players, setPlayers] = useState<Player[]>([]);
 
@@ -21,7 +20,8 @@ const ListOfPlayers = () => {
 
     // found the club information of each player
     const playersWithClub = playersList.map((player) => {
-      const clubOfPlayer = clubsList.find((club: any) => club.id === player.clubId);
+
+      const clubOfPlayer = clubsList.find((club: Club) => club.id === player.clubId);
       const positionName = positionNames[player.ultraPosition];
 
       if (clubOfPlayer) {
@@ -34,19 +34,23 @@ const ListOfPlayers = () => {
       }
       return player;
     });
+
     setPlayers(playersWithClub);
   };
 
 
   const filteringPlayers = () => {
     const filteredPlayers = players.filter((player) => {
+
       const fullName = `${player.firstName} ${player.lastName}`.toLowerCase();
       const nameMatchingCondition = fullName.includes(searchInput.toLowerCase());
+
       if (dropDownValue) {
         return player.ultraPosition === +dropDownValue && nameMatchingCondition;
       }
       return nameMatchingCondition;
     });
+
     setFilteredPlayers(filteredPlayers);
   };
 
@@ -60,16 +64,8 @@ const ListOfPlayers = () => {
   }, [searchInput, dropDownValue]);
 
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        backgroundColor: '#FFFFFF',
-
-      }}
-    >
+    <SafeAreaView style={styles.container}>
       <Header text={'Liste des joueurs'} />
-
 
       <SearchBar
         searchInput={searchInput}
@@ -83,13 +79,23 @@ const ListOfPlayers = () => {
 
       <FlatList
         data={filteredPlayers.length ? filteredPlayers : players}
-        style={{ width: '80%' }}
+        style={styles.playerList}
         renderItem={({ item: player }) => <PlayerCard player={player} />}
         showsVerticalScrollIndicator={false}
       />
-
     </SafeAreaView>
   );
 };
 
 export default ListOfPlayers;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+  },
+  playerList: {
+    width: '80%',
+  },
+});

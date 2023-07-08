@@ -25,16 +25,40 @@ export type Player = {
   positionName?: string,
   quotation: number,
   clubId: string,
-  stats: Stats,
+  stats: MainStats,
   clubName?: string,
   defaultJerseyUrl?: string
 };
 
-
-export type Stats = {
+type MainStats = {
   averageRating: number,
   totalGoals: number,
   totalMatches: number,
   totalStartedMatches: number,
   totalPlayedMatches: number,
+}
+
+export type playerChampionshipDetails = {
+  key: string;
+  value: {
+    keySeasonStats?: ChampionShipStats;
+    percentRanks?: ChampionShipStats;
+    averagePercentRanks?: ChampionShipStats;
+    [clubId: string]: any
+  };
+};
+
+export type ChampionShipStats = {
+  quotation: string,
+  averageRating: string,
+  percentageCleanSheet: string,
+  ratioGoalsConceded: string,
+  ratioInterceptions: string,
+  percentageStarter: string,
+
+}
+
+export type Quotation = {
+  date: string,
+  quotation: number
 }
