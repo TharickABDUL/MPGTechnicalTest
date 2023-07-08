@@ -1,25 +1,30 @@
-import { View, Text, TextInput } from 'react-native';
-import { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { Dispatch, SetStateAction, useState } from 'react';
 
-const SearchBar = ({ players, setFilteredPlayers }: any) => {
+import { X } from 'react-native-feather';
 
-    const [searchInput, setSearchInput] = useState('');
 
-    const onChangeSearch = (input: string) => {
-      setSearchInput(input);
-      const filteredPlayers = players.filter((player: any) => {
-        const fullName = `${player.firstName} ${player.lastName}`.toLowerCase();
-        return fullName.includes(input.toLowerCase());
-      });
-      setFilteredPlayers(filteredPlayers);
-    };
+type SearchBarProps = {
+  searchInput: string
+  setSearchInput: Dispatch<SetStateAction<string>>
+
+}
+
+const SearchBar = ({ searchInput, setSearchInput }: SearchBarProps) => {
+
 
     return (
-      <TextInput
-        onChangeText={onChangeSearch}
-        value={searchInput}
-        style={{ borderWidth: 1, borderRadius: 15, paddingHorizontal: 20, width: '50%', height: 25 }}
-      />
+      <View style={{flexDirection: 'row',  width: '55%', alignItems: 'center'}}>
+        <TextInput
+          onChangeText={setSearchInput}
+          value={searchInput}
+          style={{ borderWidth: 1, borderRadius: 15, paddingHorizontal: 20, marginRight: 10, width: '100%', height: 50 }}
+          placeholder={'Entrez le nom d\'un joueur'}
+        />
+        <TouchableOpacity onPress={()=> setSearchInput('')}>
+          <X stroke={'black'} />
+        </TouchableOpacity>
+      </View>
     );
   }
 ;

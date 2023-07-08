@@ -12,6 +12,9 @@ const ListOfPlayers = () => {
   const [filteredPlayers, setFilteredPlayers] = useState<Player[]>([]);
   const [players, setPlayers] = useState<Player[]>([]);
 
+  const [searchInput, setSearchInput] = useState('');
+  const [dropDownValue, setDropDownValue] = useState<string | null>(null);
+
 
   const fetchPlayersInfoWithTheirCLubInfo = async () => {
     const [playersList, clubsList] = await Promise.all([getPlayersList(), getClubsList()]);
@@ -34,9 +37,27 @@ const ListOfPlayers = () => {
     setPlayers(playersWithClub);
   };
 
+
+  const filteringPlayers = () => {
+    const filteredPlayers = players.filter((player) => {
+      const fullName = `${player.firstName} ${player.lastName}`.toLowerCase();
+      const nameMatchingCondition = fullName.includes(searchInput.toLowerCase());
+      if (dropDownValue) {
+        return player.ultraPosition === +dropDownValue && nameMatchingCondition;
+      }
+      return nameMatchingCondition;
+    });
+    setFilteredPlayers(filteredPlayers);
+  };
+
+
   useEffect(() => {
     fetchPlayersInfoWithTheirCLubInfo();
   }, []);
+
+  useEffect(() => {
+    filteringPlayers();
+  }, [searchInput, dropDownValue]);
 
   return (
     <SafeAreaView
@@ -49,9 +70,16 @@ const ListOfPlayers = () => {
     >
 
 
-      <SearchBar players={players} setFilteredPlayers={setFilteredPlayers} />
+        <SearchBar
+          searchInput={searchInput}
+          setSearchInput={setSearchInput}
+        />
 
-      <PositionSelector players={players} setFilteredPlayers={setFilteredPlayers} />
+        <PositionSelector
+          dropDownValue={dropDownValue}
+          setDropDownValue={setDropDownValue}
+        />
+
       <FlatList
         data={filteredPlayers.length ? filteredPlayers : players}
         style={{ width: '80%' }}

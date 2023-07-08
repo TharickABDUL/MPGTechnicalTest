@@ -1,19 +1,20 @@
-import { View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
-import { Player, positionNames } from '../interface/Player';
+import { positionNames } from '../interface/Player';
+import { X } from 'react-native-feather';
 
-type PlayerCardProps = {
-  players: Player[],
-  setFilteredPlayers: Dispatch<SetStateAction<Player[]>>
+type PositionSelectorProps = {
+  dropDownValue: string | null
+  setDropDownValue: Dispatch<SetStateAction<string | null>>
+
 }
 
-const PositionSelector = ({ players, setFilteredPlayers }: PlayerCardProps) => {
+const PositionSelector = ({ dropDownValue, setDropDownValue }: PositionSelectorProps) => {
 
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(null);
   const [items, setItems] = useState(
     Object.entries(positionNames).map(([value, label]) => (
       {
@@ -22,26 +23,22 @@ const PositionSelector = ({ players, setFilteredPlayers }: PlayerCardProps) => {
       }
     )));
 
-  const onSelectedValue = (value: string | null) => {
-    const filteredPlayers = players.filter((player) => {
-      return player.ultraPosition === +value!;
-    });
-    setFilteredPlayers(filteredPlayers);
-
-  };
-
-
   return (
-    <DropDownPicker
-      style={{ zIndex: 1 }}
-      open={open}
-      value={value}
-      items={items}
-      setOpen={setOpen}
-      setValue={setValue}
-      setItems={setItems}
-      onChangeValue={onSelectedValue}
-    />
+    <View style={{ flexDirection: 'row', width: '55%', alignItems: 'center', zIndex: 1, marginVertical: 10 }}>
+      <DropDownPicker
+        maxHeight={300}
+        style={{ zIndex: 1, borderRadius: 15 }}
+        open={open}
+        value={dropDownValue}
+        items={items}
+        setOpen={setOpen}
+        setValue={setDropDownValue}
+        setItems={setItems}
+      />
+      <TouchableOpacity style={{ marginLeft: 10 }} onPress={() => setDropDownValue(null)}>
+        <X stroke={'black'} />
+      </TouchableOpacity>
+    </View>
   );
 };
 
