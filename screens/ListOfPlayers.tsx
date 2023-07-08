@@ -1,10 +1,10 @@
 import { Text, View, Image, SafeAreaView, FlatList } from 'react-native';
 import { useEffect, useState } from 'react';
-import { SearchBar, PlayerCard } from '../components';
+import { SearchBar, PlayerCard, PositionSelector } from '../components';
 
 import { getPlayersList } from '../services/playersList';
 import { getClubsList } from '../services/clubsList';
-import { Player, UltraPositionDetails } from '../interface/Player';
+import { Player, positionNames } from '../interface/Player';
 
 
 const ListOfPlayers = () => {
@@ -12,14 +12,6 @@ const ListOfPlayers = () => {
   const [filteredPlayers, setFilteredPlayers] = useState<Player[]>([]);
   const [players, setPlayers] = useState<Player[]>([]);
 
-  const positionNames = {
-    [UltraPositionDetails.Gardien]: 'Gardien',
-    [UltraPositionDetails.Defenseur]: 'Defenseur',
-    [UltraPositionDetails.Lateral]: 'Lateral',
-    [UltraPositionDetails.MilieuOffensif]: 'Milieu offensif',
-    [UltraPositionDetails.MilieuDefensif]: 'Milieu défensif',
-    [UltraPositionDetails.Attaquant]: 'Attaquant',
-  };
 
   const fetchPlayersInfoWithTheirCLubInfo = async () => {
     const [playersList, clubsList] = await Promise.all([getPlayersList(), getClubsList()]);
@@ -46,9 +38,6 @@ const ListOfPlayers = () => {
     fetchPlayersInfoWithTheirCLubInfo();
   }, []);
 
-  const [selectedValue, setSelectedValue] = useState('');
-
-
   return (
     <SafeAreaView
       style={{
@@ -58,17 +47,11 @@ const ListOfPlayers = () => {
 
       }}
     >
-      <View>
-        <Picker
-          selectedValue={selectedValue}
-          onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-        >
-          <Picker.Item label="Option 1" value="option1" />
-          <Picker.Item label="Option 2" value="option2" />
-          <Picker.Item label="Option 3" value="option3" />
-        </Picker>
-      </View>
+
+
       <SearchBar players={players} setFilteredPlayers={setFilteredPlayers} />
+
+      <PositionSelector players={players} setFilteredPlayers={setFilteredPlayers} />
       <FlatList
         data={filteredPlayers.length ? filteredPlayers : players}
         style={{ width: '80%' }}

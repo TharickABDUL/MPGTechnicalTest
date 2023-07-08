@@ -1,11 +1,20 @@
-export enum UltraPositionDetails {
-  Gardien = 0,
+enum UltraPositionDetails {
+  Gardien = 10,
   Defenseur = 20,
   Lateral = 21,
   MilieuDefensif = 30,
   MilieuOffensif = 31,
   Attaquant = 40
 }
+
+export const positionNames = {
+  [UltraPositionDetails.Gardien]: 'Gardien',
+  [UltraPositionDetails.Defenseur]: 'Defenseur',
+  [UltraPositionDetails.Lateral]: 'Lateral',
+  [UltraPositionDetails.MilieuOffensif]: 'Milieu offensif',
+  [UltraPositionDetails.MilieuDefensif]: 'Milieu défensif',
+  [UltraPositionDetails.Attaquant]: 'Attaquant',
+};
 
 export type Player = {
   id: number,
