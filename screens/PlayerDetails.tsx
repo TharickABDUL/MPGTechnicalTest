@@ -1,11 +1,14 @@
 import { SafeAreaView, ScrollView, View, Text, Image, StyleSheet } from 'react-native';
+import { RouteProp } from '@react-navigation/native';
 import { Header } from '../components';
 import { getPlayersDetails } from '../services/playerDetails';
 import { useEffect, useState } from 'react';
-import { playerChampionshipDetails } from '../interface/Player';
+import { Player, playerChampionshipDetails } from '../interface/Player';
 import QuotationTable from '../components/QuotationTable';
 
-const PlayerDetails = ({ route }: any) => {
+type PlayerDetailsProps = {route: RouteProp<{ PlayerDetails: { player: Player } }, 'PlayerDetails'>;}
+
+const PlayerDetails = ({ route }: PlayerDetailsProps) => {
   const { player } = route.params;
 
   const [playerChampionshipsDetails, setPlayerChampionshipsDetails] = useState<playerChampionshipDetails[]>();

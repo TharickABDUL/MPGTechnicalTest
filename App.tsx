@@ -1,20 +1,28 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import { HomeScreen, ListOfPlayers, PlayerDetails } from './screens';
+import { Player } from './interface/Player';
 
-const Stack = createNativeStackNavigator();
+type RootStackParamList = {
+  Home: undefined;
+  ListOfPlayers: undefined;
+  PlayerDetails: { player: Player }; // Remplacez `Player` par le type approprié pour votre objet player
+};
 
 const App = () => {
+
+  const RootStack = createStackNavigator<RootStackParamList>();
+
   return (
     <NavigationContainer>
-      <Stack.Navigator
+      <RootStack.Navigator
         screenOptions={{ headerShown: false }}
         initialRouteName='Home'
       >
-        <Stack.Screen name='Home' component={HomeScreen} />
-        <Stack.Screen name='ListOfPlayers' component={ListOfPlayers} />
-        <Stack.Screen name='PlayerDetails' component={PlayerDetails} />
-      </Stack.Navigator>
+        <RootStack.Screen name='Home' component={HomeScreen} />
+        <RootStack.Screen name='ListOfPlayers' component={ListOfPlayers} />
+        <RootStack.Screen name='PlayerDetails' component={PlayerDetails} />
+      </RootStack.Navigator>
     </NavigationContainer>
   );
 };

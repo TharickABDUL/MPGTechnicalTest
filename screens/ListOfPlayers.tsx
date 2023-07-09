@@ -1,4 +1,4 @@
-import { SafeAreaView, FlatList, StyleSheet } from 'react-native';
+import { SafeAreaView, FlatList, StyleSheet, Text } from 'react-native';
 import { useEffect, useState } from 'react';
 import { SearchBar, PlayerCard, PositionSelector, Header } from '../components';
 import { getPlayersList } from '../services/playersList';
@@ -77,12 +77,16 @@ const ListOfPlayers = () => {
         setDropDownValue={setDropDownValue}
       />
 
-      <FlatList
-        data={filteredPlayers.length ? filteredPlayers : players}
-        style={styles.playerList}
-        renderItem={({ item: player }) => <PlayerCard player={player} />}
-        showsVerticalScrollIndicator={false}
-      />
+      {!filteredPlayers.length && (searchInput || dropDownValue) ?
+        <Text>Pas de joueur correspondant à votre recherche</Text>
+        :
+        <FlatList
+          data={filteredPlayers.length ? filteredPlayers : players}
+          style={styles.playerList}
+          renderItem={({ item: player }) => <PlayerCard player={player} />}
+          showsVerticalScrollIndicator={false}
+        />
+      }
     </SafeAreaView>
   );
 };

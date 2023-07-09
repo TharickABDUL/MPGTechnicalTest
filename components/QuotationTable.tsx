@@ -40,10 +40,10 @@ const QuotationTable = ({ playerChampionshipsDetails }: QuotationTableProps) => 
                            stats={championShip.value.keySeasonStats}
               />
               <PlayerStats title={'percentRanks'}
-                           stats={championShip.value.percentRanks}
+                           stats={championShip.value.percentRanks!}
               />
               <PlayerStats title={'averagePercentRanks'}
-                           stats={championShip.value.averagePercentRanks}
+                           stats={championShip.value.averagePercentRanks!}
               />
             </View>
           }

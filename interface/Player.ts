@@ -17,7 +17,7 @@ export const positionNames = {
 };
 
 export type Player = {
-  id: number,
+  id: string,
   firstName: string,
   lastName: string,
   position: number,
