@@ -21,7 +21,7 @@ const PositionSelector = ({ dropDownValue, setDropDownValue }: PositionSelectorP
   };
 
   return (
-    <View style={styles.container}>
+    <View nativeID='position-selector' style={styles.container}>
       <DropDownPicker
         maxHeight={300}
         style={styles.dropDownList}

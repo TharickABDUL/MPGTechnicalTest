@@ -15,7 +15,7 @@ const HomeScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View nativeID='home-screen' style={styles.container}>
       <Image
         source={require('./../assets/mpgLogo.png')}
         resizeMode='contain'

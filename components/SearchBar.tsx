@@ -8,7 +8,7 @@ type SearchBarProps = {
 }
 
 const SearchBar = ({ searchInput, setSearchInput }: SearchBarProps) => (
-  <View style={styles.container}>
+  <View nativeID='search-bar' style={styles.container}>
     <TextInput
       onChangeText={setSearchInput}
       value={searchInput}

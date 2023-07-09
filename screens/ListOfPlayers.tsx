@@ -81,6 +81,7 @@ const ListOfPlayers = () => {
         <Text>Pas de joueur correspondant à votre recherche</Text>
         :
         <FlatList
+          nativeID='players-list'
           data={filteredPlayers.length ? filteredPlayers : players}
           style={styles.playerList}
           renderItem={({ item: player }) => <PlayerCard player={player} />}

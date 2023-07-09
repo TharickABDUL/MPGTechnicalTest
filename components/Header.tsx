@@ -13,7 +13,7 @@ const Header = ({ text }: HeaderProps) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View nativeID='header' style={styles.container}>
 
       <TouchableOpacity style={styles.backButton} onPress={navigateToCreateAccount}>
         <ArrowLeft stroke={'black'} />

@@ -31,12 +31,12 @@ const PlayerDetails = ({ route }: PlayerDetailsProps) => {
           style={styles.image}
         />
 
-        <View style={styles.mainInformation}>
+        <View nativeID='player-main-info' style={styles.mainInformation}>
           <Text style={styles.playerName}>{player.firstName} {player.lastName}</Text>
           <Text style={styles.clubInfo}>{player.positionName} du {player.clubName}</Text>
         </View>
 
-        <View style={styles.mainStatsContainer}>
+        <View nativeID='player-main-stats' style={styles.mainStatsContainer}>
           <View style={styles.mainStatsRow}>
             <Text>{player.quotation} quotation</Text>
             <Text>{player.stats.averageRating.toFixed(2)} averageRating</Text>
