@@ -6,12 +6,12 @@ const positions = Object.values(positionNames);
 
 describe('check the players list page', () => {
 
-
   beforeEach(() => {
     cy.visit('http://localhost:19006');
     // click on the Let's go button
     cy.get('[id="home-screen"] > :last-child').click();
   });
+
 
   it('default behaviour', () => {
     // select Attaquant
@@ -40,6 +40,7 @@ describe('check the players list page', () => {
     cy.get('[id="header"] > :nth-child(2) > :last-child').contains('Fiche détailée du joueur');
   });
 
+
   it('enter wrong position for a player', () => {
     // type the player name
     cy.get('[id="search-bar"] > :first-child')
@@ -56,6 +57,7 @@ describe('check the players list page', () => {
     // check message
     cy.contains('Pas de joueur correspondant à votre recherche');
   });
+
 
   it('enter the name of a player not on the list', () => {
     cy.get('[id="search-bar"] > :first-child')
@@ -79,6 +81,7 @@ describe('check the players list page', () => {
     cy.get('[id="search-bar"] > :last-child').click()
     cy.get('[id="search-bar"] > :first-child').should('not.have.value', firstPlayerName)
   });
+
 
   it('check the dropDownList', () => {
     // check placeholder
